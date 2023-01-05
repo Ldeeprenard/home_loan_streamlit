@@ -5,7 +5,7 @@ Here's our first attempt at using data to create a table:
 
 import streamlit as st
 import pandas as pd
-df = pd.read_csv ("clients_test.csv",index_col=1)
+df = pd.read_csv ("clients_test.csv",index_col=0)
 
 st.write ("affichage de quelques clients")
 

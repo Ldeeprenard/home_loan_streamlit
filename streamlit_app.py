@@ -13,10 +13,12 @@ st.write (df.sample(5))
 
 st.text_input("ID du client", key="clientid")
 
-if st.session_state.clientid in df.index.to_list():
 
+if int(st.session_state.clientid) in df.index:
 
     df.loc[int(st.session_state.clientid)]
+
+
 else:
     st.write ("le client n'existe pas")
     st.write (int(st.session_state.clientid))

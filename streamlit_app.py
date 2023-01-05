@@ -7,6 +7,12 @@ import streamlit as st
 import pandas as pd
 df = pd.read_csv ("clients_test.csv",index_col=0)
 
-st.write (df.head())
+st.write ("affichage de quelques clients")
 
-x = st.slider('x')  # 👈 this is a widget
+st.write (df.sample())
+
+st.text_input("ID du client", key="clientid")
+
+if clientid:
+
+    df.loc[clientid]

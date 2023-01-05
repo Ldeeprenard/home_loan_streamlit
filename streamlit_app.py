@@ -13,7 +13,7 @@ st.write (df.sample(5))
 
 st.text_input("ID du client", key="clientid")
 
-if st.session_state.clientid in df.index:
+if st.session_state.clientid:
 
     st.write (type(st.session_state.clientid))
 

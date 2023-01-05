@@ -9,10 +9,10 @@ df = pd.read_csv ("clients_test.csv",index_col=0)
 
 st.write ("affichage de quelques clients")
 
-st.write (df.sample())
+st.write (df.sample(5))
 
 st.text_input("ID du client", key="clientid")
 
-if clientid:
+if st.session_state.clientid:
 
-    df.loc[clientid]
+    df.loc[st.session_state.clientid]

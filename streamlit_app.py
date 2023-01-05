@@ -20,4 +20,4 @@ if st.session_state.clientid in df.index:
     st.write(df.loc[int(st.session_state.clientid)])
 else:
     st.write ("le client n'existe pas")
-    st.write (type(int(st.session_state.clientid)))
+    st.write (int(st.session_state.clientid))

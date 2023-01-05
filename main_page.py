@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-st.markdown("# 3eme page 🎈")
-st.sidebar.markdown("# 3eme page 🎈")
+st.markdown("# Main page 🎈")
+st.sidebar.markdown("# Main page 🎈")
 
 
 df = pd.read_csv ("clients_test.csv",index_col=0)

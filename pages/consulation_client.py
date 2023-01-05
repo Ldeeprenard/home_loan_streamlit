@@ -5,9 +5,7 @@ def tableau(client):
 
     col1, col2, col3 = st.columns(3)
 
-    age,age_med = round(client.Age),round(df.Age.median())
-
-    col1.metric("age", age, delta=age_med, delta_color="normal", help="Age du client par rapport à l'âge médian", label_visibility="visible")
+    col1.metric("age", round(client.Age), delta=-round(df.Age.median()), delta_color="normal", help="Age du client par rapport à l'âge médian", label_visibility="visible")
     col2.metric("Montant du prêt", client.AMT_CREDIT, delta=df.AMT_CREDIT.median(), delta_color="normal", help="Montant du prêt demandé par rapport au prêt médian", label_visibility="visible")
     col3.metric("Nombre de crédits contractés", client.nb_credit, delta=df.nb_credit.median(), delta_color="normal", help="Montant de crédits contractés par rapport au nombre de crédits médian", label_visibility="visible")
 

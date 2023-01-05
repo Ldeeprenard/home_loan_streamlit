@@ -17,7 +17,7 @@ if st.session_state.clientid:
 
     st.write (type(st.session_state.clientid))
 
-    st.write(df.loc[int(st.session_state.clientid)])
+    df.loc[int(st.session_state.clientid)]
 else:
     st.write ("le client n'existe pas")
     st.write (int(st.session_state.clientid))

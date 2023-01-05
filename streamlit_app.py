@@ -25,12 +25,12 @@ if clientid in df.index:
 
     df.loc[clientid]
 
-    st.session_state.clientid = None
+    st.session_state.clientid = ""
     clientid = None
 
 
 else:
     st.write ("le client n'existe pas")
-    st.session_state.clientid = None
+    st.session_state.clientid = ""
     clientid = None
 

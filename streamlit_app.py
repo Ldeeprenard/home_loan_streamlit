@@ -7,4 +7,4 @@ import streamlit as st
 import pandas as pd
 df = pd.read_csv ("clients_test.csv")
 
-df.head()
+df

@@ -23,7 +23,7 @@ if st.session_state.clientid:
 
 if clientid in df.index:
 
-    df.loc[int(st.session_state.clientid)]
+    df.loc[clientid]
 
     st.session_state.clientid = None
     clientid = None

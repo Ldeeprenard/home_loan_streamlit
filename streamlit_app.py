@@ -13,9 +13,8 @@ st.write (df.sample(5))
 
 st.text_input("ID du client", key="clientid")
 
-if st.session_state.clientid:
+if st.session_state.clientid in df.index.to_list():
 
-    st.write (type(st.session_state.clientid))
 
     df.loc[int(st.session_state.clientid)]
 else:

@@ -11,14 +11,26 @@ st.write ("affichage de quelques clients")
 
 st.write (df.sample(5))
 
-st.text_input("ID du client", key="clientid")
+st.text_input("Veuillez entrer l'ID du client", key="clientid")
+clientbox = st.selectbox('Ou le selectionner dans la liste',df.index)
+
+if clientbox:
+    clientid = clientbox
+
+if st.session_state.clientid:
+    clientid = int (st.session_state.clientid)
 
 
-if int(st.session_state.clientid) in df.index:
+if clientid in df.index:
 
     df.loc[int(st.session_state.clientid)]
+
+    st.session_state.clientid = None
+    clientid = None
 
 
 else:
     st.write ("le client n'existe pas")
-    st.write (int(st.session_state.clientid))
+    st.session_state.clientid = None
+    clientid = None
+

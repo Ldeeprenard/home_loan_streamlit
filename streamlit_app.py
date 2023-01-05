@@ -15,6 +15,6 @@ st.text_input("ID du client", key="clientid")
 
 if st.session_state.clientid in df.index:
 
-
-
     st.write(df.loc[st.session_state.clientid])
+else:
+    st.write ("le client n'existe pas")

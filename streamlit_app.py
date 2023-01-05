@@ -15,4 +15,4 @@ st.text_input("ID du client", key="clientid")
 
 if st.session_state.clientid:
 
-    df.loc[st.session_state.clientid]
+    st.write(df.loc[st.session_state.clientid])

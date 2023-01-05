@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 def tableau(client):
-    client.montant_credits_total
+    st.metric("age", client.Age, delta=df.Age.median(), delta_color="normal", help="Age médian des clients", label_visibility="visible")
 
 st.markdown("# Consultation client")
 st.sidebar.markdown("# Consultation client")

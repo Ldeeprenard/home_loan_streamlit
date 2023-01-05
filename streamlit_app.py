@@ -8,3 +8,6 @@ import pandas as pd
 df = pd.read_csv ("clients_test.csv",index_col=0)
 
 st.write (df.head())
+
+x = st.slider('x')  # 👈 this is a widget
+st.write(x, 'squared is', x * x)

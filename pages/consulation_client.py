@@ -7,7 +7,7 @@ def tableau(client):
 
     col1.metric("age", round(client.Age), delta=round(df.Age.median()), delta_color="inverse", help="Age du client par rapport à l'âge médian", label_visibility="visible")
     col2.metric("Montant du prêt", client.AMT_CREDIT, delta=df.AMT_CREDIT.median(), delta_color="inverse", help="Montant du prêt demandé par rapport au prêt médian", label_visibility="visible")
-    col2.metric("Nombre de crédits contractés", client.nb_credit, delta=df.nb_credit.median(), delta_color="inverse", help="Montant de crédits contractés par rapport au nombre de crédits médian", label_visibility="visible")
+    col3.metric("Nombre de crédits contractés", client.nb_credit, delta=df.nb_credit.median(), delta_color="inverse", help="Montant de crédits contractés par rapport au nombre de crédits médian", label_visibility="visible")
 
 
 st.markdown("# Consultation client")

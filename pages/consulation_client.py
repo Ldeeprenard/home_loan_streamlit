@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 
 def tableau(client):
-    st.metric("age", round(client.Age, delta=df.Age.median()), delta_color="normal", help="Age du client par rapport à l'âge médian", label_visibility="visible")
+    st.metric("age", round(client.Age), delta=df.Age.median(), delta_color="normal", help="Age du client par rapport à l'âge médian", label_visibility="visible")
     #st.metric("age", client.Age, delta=df.Age.median(), delta_color="normal", help="Age du client par rapport à l'âge médian", label_visibility="visible")
-    
+
 
 st.markdown("# Consultation client")
 st.sidebar.markdown("# Consultation client")

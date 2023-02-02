@@ -1,5 +1,5 @@
 on: [push]
-name: home-loan-streamlit
+name: Linux_Container_Workflow
 
 jobs:
     build-and-deploy:
@@ -34,4 +34,4 @@ jobs:
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: aci-sampleapp
-            location: 'east us'
+            location: 'west us'

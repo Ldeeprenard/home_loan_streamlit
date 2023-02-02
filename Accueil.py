@@ -9,7 +9,7 @@ st.sidebar.markdown("# Accueil")
 
 st.write ("Page d'accueil du projet 7")
 
-st.write ("c'est bon maintenant?!")
+st.write ("test deploiement")
 
 
 

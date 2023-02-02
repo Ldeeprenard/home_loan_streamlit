@@ -4,7 +4,7 @@ import requests
 import json
 azure_path ="https://artefactsmlflow.blob.core.windows.net/predictions/2/"
 ML_SERVE = 'http://192.168.1.10:5001/invocations'
-feats = joblib.load ("pages\colonnes_home_loan.joblib")
+feats = joblib.load ("colonnes_home_loan.joblib")
 headers = {'Content-Type' : 'application/json'}
 run_id = None
 

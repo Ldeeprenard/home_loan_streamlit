@@ -3,8 +3,7 @@
 FROM python:3.9-slim
 
 
-WORKDIR /app
-RUN ls
+
 copy requirements.txt ./requirements.txt
 run pip3 install -r requirements.txt
 

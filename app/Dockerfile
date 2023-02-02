@@ -3,7 +3,8 @@
 FROM python:3.9-slim
 
 
-WORKDIR C:\Users\Lrenard\Documents\openclassroom\projet 7\streamlit\home_loan_streamlit
+WORKDIR /app
+
 copy requirements.txt ./requirements.txt
 run pip3 install -r requirements.txt
 

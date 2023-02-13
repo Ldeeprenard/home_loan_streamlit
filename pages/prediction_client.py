@@ -3,7 +3,7 @@ import joblib
 import requests
 import json
 azure_path ="https://artefactsmlflow.blob.core.windows.net/predictions/"
-ML_SERVE = 'http://77.130.38.195:5001/invocations'
+ML_SERVE = 'http://homeloanmlflow.ddns.net:5001/invocations'
 
 
 feats = joblib.load ("colonnes_home_loan.joblib")
@@ -20,61 +20,60 @@ def data_to_dico (labels,data):
     return dico
 
 
-
+st.set_page_config(layout="wide")
 st.markdown("# Prediction")
 st.sidebar.markdown("# Prediction")
 
 
-st.title("Prédiction de la capacité d'un client à rembourser un emprunt")
+st.header("Prédiction de la capacité d'un client à rembourser un emprunt")
 
-AMT_INCOME_TOTAL = st.number_input('Revenus',
-                                min_value=0., value=3.87, step=1.)
 
-AMT_CREDIT = st.number_input('valeur du crédit demandé',
-                            min_value=0., value=28., step=1.)
+st.subheader ("informations client")
+col1,col2,col3,col4 = st.columns (4)
 
-AMT_GOODS_PRICE = st.number_input('Prix du bien à acheter',
-                                min_value=0., value=5., step=1.)
+with col1:
+    YEARS_EMPLOYED = st.number_input("Nombre d'années d'emploi",min_value=0., value=1., step=1.)
 
-YEARS_EMPLOYED = st.number_input("Nombre d'années d'emploi",
-                                    min_value=0., value=1., step=1.)
+with col2:
+    Age	 = st.number_input('Age de la personne',value=20., step=1.)
 
-nb_credit = st.number_input('nombre de crédits contractés',
-                                min_value=0, value=1425, step=100)
+with col3:
+    AMT_INCOME_TOTAL = st.number_input('Revenus',min_value=0, value=10000, step=100)
 
-jour_dernier_credit = st.number_input('combien de jours avant la fin du dernier crédit',
-                                    min_value=0., value=3., step=1.)
+st.subheader ("Information crédit demandé")
 
-montant_credits_total = st.number_input('Montant total des crédits contractés',
-                            value=35., step=1.)
+col5,col6,col7,col8 = st.columns (4)
 
-dette_due_actuelle_total = st.number_input('Dette actuelle relative à ces crédits',
-                            value=-119., step=1.)
-demande_credit_med = st.number_input('Somme médiane demandée lors des précédants crédits',
-                                min_value=0., value=3.87, step=1.)
+with col5:
+    AMT_CREDIT = st.number_input('valeur du crédit demandé',min_value=0., value=5000., step=100.)
 
-credit_accord_med = st.number_input('Somme médiane accordée',
-                            min_value=0., value=28., step=1.)
+with col6:
+    AMT_GOODS_PRICE = st.number_input('Prix du bien à acheter',min_value=0., value=5000., step=100.)
 
-valeur_biens_med = st.number_input('valeur médiane des biens achetés',
-                                min_value=0., value=5., step=1.)
+st.subheader ("information prêts précédents")
 
-accord_pret_moy  = st.number_input('Moyenne des crédits accordés',
-                                    min_value=0., value=1., step=1.)
+col9,col10,col11,col12 = st.columns (4)
 
-duree_credit_med = st.number_input('Durée médiane des crédits',
-                                min_value=0, value=1425, step=100)
+with col9:
+    nb_credit = st.number_input('nombre de crédits contractés',min_value=0, value=2, step=1)
+    demande_credit_med = st.number_input('Somme médiane demandée lors des précédants crédits',min_value=0, value=100, step=1)
+    duree_credit_med = st.number_input('Durée médiane des crédits',min_value=0, value=100, step=100)
 
-retard_payement_total = st.number_input('Retard des paiements cumulés sur tous les crédits',
-                                    min_value=0., value=3., step=1.)
+with col10:                                    
+    jour_dernier_credit = st.number_input('combien de jours avant la fin du dernier crédit',min_value=0., value=0., step=1.) 
+    credit_accord_med = st.number_input('Somme médiane accordée',min_value=0., value=2., step=1.)
+    retard_payement_total = st.number_input('Retard des paiements cumulés sur tous les crédits',min_value=0., value=3., step=1.)
 
-Somme_non_remboursee_total = st.number_input('Somme non remboursées sur des emprunts terminés',
-                            value=35., step=1.)
+with col11:
+    montant_credits_total = st.number_input('Montant total des crédits contractés',value=3500., step=100.)
+    valeur_biens_med = st.number_input('valeur médiane des biens achetés',min_value=0., value=1000., step=1.)
+    Somme_non_remboursee_total = st.number_input('Somme non remboursées sur des emprunts terminés',value=35., step=1.)
 
-Age	 = st.number_input('Age de la personne',
-                            value=-119., step=1.)
-not_ext	 = st.number_input("Moyenne des notes d'organismes extérieurs",
-                            value=-140., step=1.)                               
+with col12:
+    dette_due_actuelle_total = st.number_input('Dette actuelle relative à ces crédits',value=0., step=100.)
+    accord_pret_moy  = st.number_input('Moyenne des crédits accordés',min_value=0., value=1., step=1.,max_value=10.)
+    not_ext	 = st.number_input("Moyenne des notes sur le client provenant d'organismes extérieurs",value=5., step=1.)  
+                       
 
 predict_btn = st.button('Prédire')
 
@@ -84,10 +83,12 @@ datas = [AMT_INCOME_TOTAL,AMT_CREDIT,AMT_GOODS_PRICE,YEARS_EMPLOYED,nb_credit,jo
 
 if predict_btn:
 
+    
+
     data_dico = data_to_dico (feats,datas)
 
-
     request_data = json.dumps ({"dataframe_records": [data_dico]})
+
     response = requests.post (ML_SERVE,request_data,headers=headers)
 
     if response.json()["predictions"][0] ==[0]:

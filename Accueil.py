@@ -1,9 +1,10 @@
 import streamlit as st
 import requests
+import random
 
 st.markdown("# Accueil")
 st.sidebar.markdown("# Accueil")
-
+st.set_page_config(layout="wide")
 
 st.header ("Bienvenue sur le site du projet 7 DS")
 
@@ -17,13 +18,15 @@ st.write ("Je confie la tâche de combler l'espace vide au modèle GPT-2.")
 API_URL = "https://api-inference.huggingface.co/models/gpt2"
 headers = {"Authorization": "Bearer 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"}
 
+
 def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.json()
 	
 output = query({
 	"inputs": "This site is part of OpenClassroom's Data Scientist Project 7 and allows for easy visualization of customer data provided by the Home Loan bank. It also allows for predicting if the customer will be able to repay the loan.",
-    "parameters": {"min_length": 50,"max_length":300,"temperature":50,"repetition_penalty":50},
+    "parameters": {"min_length": 400,"max_length":500,"temperature":random.randrange(100),"repetition_penalty":random.randrange(100),"top_k":random.randrange(5),"top_p":random.uniform(0,1)},
 })
+
 
 st.write (output[0]["generated_text"])

@@ -1,24 +1,36 @@
 import streamlit as st
 import pandas as pd
+import numpy
+import altair as alt
+
+st.set_page_config(layout="wide")
 
 @st.experimental_memo
 def load_df():
-    return pd.read_csv ("clients_test.csv",index_col=0)
+    
+    df = pd.read_csv ("clients_test.csv",index_col=0).convert_dtypes (convert_floating=True)
+    df = df.replace ("inconnu",numpy.nan)
+    return df.apply (pd.to_numeric)
 
 
 df = load_df()
 
 def tableau(client):
 
-    col1, col2, col3 = st.columns(3)
+    tab1 = client
+    tab2 = df.describe().loc[["mean","min","50%","max"]]
 
-    col1.metric("age", round(client.Age), delta=round(df.Age.median()), delta_color="normal", help="Age du client par rapport à l'âge médian", label_visibility="visible")
-    col2.metric("Montant du prêt", client.AMT_CREDIT, delta=df.AMT_CREDIT.median(), delta_color="normal", help="Montant du prêt demandé par rapport au prêt médian", label_visibility="visible")
-    col3.metric("Nombre de crédits contractés", client.nb_credit, delta=df.nb_credit.median(), delta_color="normal", help="Montant de crédits contractés par rapport au nombre de crédits médian", label_visibility="visible")
+    st.dataframe (pd.concat ([tab1,tab2],axis=0),height=200)
 
 st.markdown("# Consultation client")
 
 st.sidebar.markdown("# Consultation client")
+
+def graph():
+    c = alt.Chart(df).transform_density("Age",as_=['Age', 'density']).mark_area(orient='horizontal').encode(y='Age:Q',x=alt.X('density:Q',stack='center',impute=None,title=None,axis=alt.Axis(labels=False, values=[0],grid=False, ticks=True),)).properties(width=100).configure_facet(spacing=0).configure_view(stroke=None)
+
+    st.altair_chart(c)
+
 
 
 clientbox = st.selectbox('Selectionnez le client dans la liste',df.index)
@@ -26,8 +38,9 @@ clientbox = st.selectbox('Selectionnez le client dans la liste',df.index)
 
 if clientbox in df.index:
 
-    client = df.loc[clientbox]
+    client = df.loc[[clientbox]]
     tableau(client)
+    graph()
 
 else:
     st.write ("le client n'existe pas")

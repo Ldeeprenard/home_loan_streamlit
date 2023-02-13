@@ -2,8 +2,10 @@ import streamlit as st
 import joblib
 import requests
 import json
-azure_path ="https://artefactsmlflow.blob.core.windows.net/predictions/2/"
-ML_SERVE = 'http://192.168.1.10:5001/invocations'
+azure_path ="https://artefactsmlflow.blob.core.windows.net/predictions/"
+ML_SERVE = 'http://77.130.38.195:5001/invocations'
+
+
 feats = joblib.load ("colonnes_home_loan.joblib")
 headers = {'Content-Type' : 'application/json'}
 run_id = None
@@ -93,7 +95,8 @@ if predict_btn:
     else:
         st.write ("Le modèle prédit un défaut de remboursement du client")
 
-    run_id = response.json()["predictions"][1]
+    run_id = response.json()["predictions"][2]
+    experiment_id = response.json()["predictions"][1]
 
 
 if run_id:
@@ -102,6 +105,3 @@ if run_id:
                 l'influence positive ou négative de chaque variable et leur poids sur le résultat")
     st.write ("Il est a noté que ce graphique n'affiche que les 10 variables les plus déterminantes dans l'estimation")
     st.image (azure_path+run_id+"/artifacts/"+run_id+".png")
-
-
-

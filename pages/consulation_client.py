@@ -52,8 +52,8 @@ def warning():
     
     if client.dette_due_actuelle_total.values>50000:
         st.markdown ("#### :red[Ce client est fortement endetté]")
-    elif client.pret_accepted.values<5:
-        st.markdown ("#### :red[Beaucoup de prêts demandés ont été réfusés]")
+    elif client.accord_pret_moy.values<5:
+        st.markdown ("#### :red[Beaucoup de prêts demandés ont été refusés]")
     else:
         st.write ("Aucun avertissement à afficher pour ce client")
 

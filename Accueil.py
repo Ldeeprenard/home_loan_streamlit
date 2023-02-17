@@ -2,10 +2,12 @@ import streamlit as st
 import requests
 import random
 
+
+st.set_page_config(layout="wide")
 st.markdown("# Accueil")
 st.sidebar.markdown("# Accueil")
-st.set_page_config(layout="wide")
 
+switch = False
 st.header ("Bienvenue sur le site du projet 7 DS")
 
 st.write ("Cette partie du projet permet de rendre accessible les informations sur les clients présents dans la base fournie par Home Loan")
@@ -22,11 +24,12 @@ headers = {"Authorization": "Bearer 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"}
 def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.json()
-	
-output = query({
-	"inputs": "This site is part of OpenClassroom's Data Scientist Project 7 and allows for easy visualization of customer data provided by the Home Loan bank. It also allows for predicting if the customer will be able to repay the loan.",
-    "parameters": {"min_length": 400,"max_length":500,"temperature":random.randrange(100),"repetition_penalty":random.randrange(100),"top_k":random.randrange(5),"top_p":random.uniform(0,1)},
-})
+
+if 'output' not in st.session_state:
+	st.session_state["output"] = query({
+		"inputs": "This site is part of OpenClassroom's Data Scientist Project 7 and allows for easy visualization of customer data provided by the Home Loan bank. It also allows for predicting if the customer will be able to repay the loan.",
+		"parameters": {"min_length": 50,"max_length":200,"temperature":random.randrange(100),"repetition_penalty":random.randrange(100)},
+	})
 
 
-st.write (output[0]["generated_text"])
+st.write (st.session_state["output"])

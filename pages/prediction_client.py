@@ -6,8 +6,8 @@ import numpy
 import pandas as pd
 
 azure_path ="https://artefactsmlflow.blob.core.windows.net/predictions/"
-#ML_SERVE = 'http://homeloanmlflow.ddns.net:5001/invocations'
-ML_SERVE = 'http://192.168.1.10:5001/invocations'
+ML_SERVE = 'http://homeloanmlflow.ddns.net:5001/invocations'
+#ML_SERVE = 'http://192.168.1.10:5001/invocations'
 
 
 feats = joblib.load ("colonnes_home_loan.joblib")

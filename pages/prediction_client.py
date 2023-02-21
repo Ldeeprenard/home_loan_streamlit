@@ -8,7 +8,7 @@ import pandas as pd
 azure_path ="https://artefactsmlflow.blob.core.windows.net/predictions/"
 ML_SERVE = 'http://homeloanmlflow.ddns.net:5001/invocations'
 #ML_SERVE = 'http://192.168.1.10:5001/invocations'
-
+dataframeclient = "clients_test.csv"
 
 feats = joblib.load ("colonnes_home_loan.joblib")
 headers = {'Content-Type' : 'application/json'}
@@ -16,16 +16,16 @@ run_id = None
 predict_btn = None
 
 @st.experimental_memo
-def load_df():
+def load_df(pathdf):
     
-    df = pd.read_csv ("clients_test.csv",index_col=0)
+    df = pd.read_csv (pathdf,index_col=0)
 
     df.loc [0,:] = 0
 
     return df.apply (pd.to_numeric)
 
 
-df = load_df()
+df = load_df(dataframeclient)
 
 def data_to_dico (labels,data):
 

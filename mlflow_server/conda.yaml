@@ -1,0 +1,16 @@
+channels:
+- conda-forge
+dependencies:
+- python=3.9.13
+- pip<=23.0
+- pip:
+  - mlflow<3,>=2.1
+  - cffi==1.15.1
+  - cloudpickle==2.2.0
+  - ipython==8.8.0
+  - lightgbm==3.3.4
+  - psutil==5.9.4
+  - typing-extensions==4.4.0
+  - azure-storage-blob==12.13.0
+  - azure-identity==1.12.0
+name: mlflow-env

@@ -1,5 +1,5 @@
 # Prédiction de Risque de Défaut de Crédit 💸
-> Par [Votre Nom/Équipe]
+> Par Thériot Maxence
 
 ## 📋 Présentation du Projet
 Projet de prédiction des risques de remboursement de prêts pour Home Credit, utilisant l'apprentissage automatique et des sources de données alternatives.
